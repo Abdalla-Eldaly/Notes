@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(vertical: 16),
       child: TextField(
         maxLines:maxline ,
         cursorColor: Colors.grey,

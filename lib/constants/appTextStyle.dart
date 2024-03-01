@@ -11,7 +11,7 @@ class TextAppStyle{
     return GoogleFonts.poppins(fontSize: 16, color: Colors.black.withOpacity(0.55), fontWeight: FontWeight.w500);
   }
   static TextStyle btnStyle (){
-    return GoogleFonts.roboto(fontSize: 25,);
+    return GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.black.withOpacity(.7));
   }
 
 }
