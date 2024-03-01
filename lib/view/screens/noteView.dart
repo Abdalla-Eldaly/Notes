@@ -5,6 +5,7 @@ import '../widgets/customAppbar.dart';
 import '../widgets/noteListView.dart';
 
 class NoteView extends StatelessWidget {
+  static String routeName = 'note';
   const NoteView({super.key});
 
   @override
@@ -34,7 +35,7 @@ class NoteView extends StatelessWidget {
             SizedBox(
               height: 60,
             ),
-            CustomAppbar(),
+            CustomAppbar(title: 'Notes', iconData: Icons.search,),
             SizedBox(
               height: 15,
             ),
