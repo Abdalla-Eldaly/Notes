@@ -6,18 +6,27 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.labelText,
-    required this.textInputType, this.maxline=1,
+    required this.textInputType, this.maxline=1, this.onsave,
   });
   final String hintText;
   final String labelText;
   final int maxline;
   final TextInputType textInputType;
+  final void Function(String?)? onsave;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 16),
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if(value?.isEmpty??true){
+          return 'Failed is requiresd'  ;
+          }else {
+            return null;
+          }
+        },
+        onSaved: onsave,
         maxLines:maxline ,
         cursorColor: Colors.grey,
 
