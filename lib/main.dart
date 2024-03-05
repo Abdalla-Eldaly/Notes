@@ -7,6 +7,7 @@ import 'package:nota/model/noteModel.dart';
 import 'package:nota/simple_Bloc_Observer.dart';
 import 'package:nota/view/screens/noteEdite.dart';
 import 'package:nota/view/screens/noteView.dart';
+import 'package:nota/view/screens/splashScreen.dart';
 
 import 'constants/strings.dart';
 
@@ -21,16 +22,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NoteCubit(),
       child: MaterialApp(
 
-        home: NoteView(),
+        home: SplashScreen(),
         debugShowCheckedModeBanner: false,
-        title: 'Nota',
+        title: 'ع النوته',
         theme: ThemeData.dark(
           useMaterial3: true,
         ),

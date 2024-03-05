@@ -8,6 +8,7 @@ import '../../model/noteModel.dart';
 import '../widgets/common/customAppbar.dart';
 import '../widgets/noteForm/addNoteBottomSheet.dart';
 import '../widgets/noteItem/noteListView.dart';
+import '../widgets/search/customSearchDelegate.dart';
 
 class NoteView extends StatefulWidget {
   static String routeName = 'note';
@@ -20,7 +21,6 @@ class NoteView extends StatefulWidget {
 
 class _NoteViewState extends State<NoteView> {
   TextEditingController searchController = TextEditingController();
-
   @override
   void initState() {
     BlocProvider.of<NoteCubit>(context).featchnote();
@@ -76,72 +76,3 @@ class _NoteViewState extends State<NoteView> {
   }
 }
 
-class CustomSearchDelegate extends SearchDelegate<NoteModel> {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return _buildSearchResults(query);
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return _buildSearchResults(query);
-  }
-
-  Widget _buildSearchResults(String query) {
-    // Implement your search logic using Hive here
-    final notesBox = Hive.box<NoteModel>(hiveBoxName);
-
-    // Query your Hive box and update the UI accordingly
-    List<NoteModel> searchResults = notesBox.values
-        .where((note) =>
-        note.title.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-
-    // Update the UI with search results
-    return ListView.builder(
-      itemCount: searchResults.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => EditNo,))
-          },
-          child: Container(
-            height: 75,
-            child: Center(
-              child: Card(
-                elevation: 20,
-                color: Colors.grey.withOpacity(.2),
-                child: ListTile(
-                  title: Text(searchResults[index].title),
-                  // Add other UI elements as needed
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}

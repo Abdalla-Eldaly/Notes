@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/buisinessLogic/fetchNote/note_cubit.dart';
@@ -48,8 +49,19 @@ class NoteItem extends StatelessWidget {
                 onPressed: () {},
                 icon: InkWell(
                     onTap: () {
-                      note.delete();
-                      BlocProvider.of<NoteCubit>(context).featchnote();
+                      AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.warning,
+                          animType: AnimType.rightSlide,
+                          title: 'Delete note',
+                          desc: 'Are you sure to delete this note?',
+                          btnCancelOnPress: () {},
+                      btnOkOnPress: () {
+                        note.delete();
+                        BlocProvider.of<NoteCubit>(context).featchnote();
+
+                      },
+                      )..show();
                     },
                     child: const Icon(
                       Icons.delete,
