@@ -1,32 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nota/buisinessLogic/fetchNote/note_cubit.dart';
 
-import '../widgets/addNoteBottomSheet.dart';
-import '../widgets/customAppbar.dart';
-import '../widgets/noteListView.dart';
+import '../widgets/noteForm/addNoteBottomSheet.dart';
+import '../widgets/common/customAppbar.dart';
+import '../widgets/noteItem/noteListView.dart';
 
-class NoteView extends StatelessWidget {
+class NoteView extends StatefulWidget {
   static String routeName = 'note';
   const NoteView({super.key});
+
+  @override
+  State<NoteView> createState() => _NoteViewState();
+}
+
+class _NoteViewState extends State<NoteView> {
+  @override
+  void initState() {
+    BlocProvider.of<NoteCubit>(context).featchnote();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.cyan,
-        shape: OvalBorder(),
+        shape: const OvalBorder(),
         onPressed: () {
-           showModalBottomSheet(
-
-             context: context, builder: (context) {
-            return AddNoteBottomSheet();
-          },);
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (context) {
+              return AddNoteBottomSheet();
+            },
+          );
         },
-        child: Container(
-            child: Icon(
-          Icons.add,
-          color: Colors.black,
-          size: 28,
-        )),
+        child: const Icon(
+                  Icons.add,
+                  color: Colors.black,
+                  size: 28,
+                ),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -35,7 +49,11 @@ class NoteView extends StatelessWidget {
             SizedBox(
               height: 60,
             ),
-            CustomAppbar(title: 'Notes', iconData: Icons.search,),
+             CustomAppbar(
+
+               title: 'Notes',
+               iconData: Icons.search,
+             ),
             SizedBox(
               height: 15,
             ),
