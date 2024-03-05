@@ -15,4 +15,8 @@ class NoteCubit extends Cubit<NoteState> {
     notes = box.values.toList();
     emit(NoteSuccess(notes!));
   }
+  void setNotes(List<NoteModel> notes) {
+    // Implement logic to set notes in the state
+    emit(NoteLoaded(notes));
+  }
 }

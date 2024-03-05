@@ -12,7 +12,7 @@ class ColorItem extends StatelessWidget {
       backgroundColor: Colors.grey.shade700,
       radius: 44,
       child: Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(4.0),
         child: CircleAvatar(
           radius: 42,
           backgroundColor: color,
